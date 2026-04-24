@@ -1,0 +1,37 @@
+services:
+  app:
+    build: .
+    container_name: quant-trader-app
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    ports:
+      - "3000:3000"
+      - "5173:5173"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=quant_trader
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+
+  db:
+    image: postgres:16-alpine
+    container_name: quant-trader-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=quant_trader
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

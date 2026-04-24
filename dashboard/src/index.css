@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-binance-bg: #0b0e11;
+  --color-binance-panel: #181a20;
+  --color-binance-border: #2b3139;
+  --color-binance-green: #0ecb81;
+  --color-binance-red: #f6465d;
+  --color-binance-gray: #848e9c;
+  
+  --font-mono: 'Fira Code', 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', 'Roboto', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-binance-bg text-binance-gray select-none h-screen w-screen overflow-hidden;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer components {
+  .panel-card {
+    @apply bg-binance-panel border border-binance-border rounded-sm;
+  }
+  
+  .terminal-text-shadow {
+    text-shadow: 0 0 15px rgba(14, 203, 129, 0.3);
+  }
+  
+  .terminal-text-shadow-red {
+    text-shadow: 0 0 15px rgba(246, 70, 93, 0.3);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-binance-border hover:bg-binance-gray;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-blink {
+  animation: blink 1.5s step-start infinite;
+}
